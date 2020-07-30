@@ -1,5 +1,9 @@
-import _ from 'lodash';
+import { Page } from './page';
+const Index = (() => {
+  const render = () => {
+    Page.start();
+  };
+  return { render };
+})();
 
-const Index = (()=>{
-    
-})
+Index.render();

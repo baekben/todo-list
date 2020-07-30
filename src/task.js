@@ -1,6 +1,6 @@
 //for single task
 
-const Task = () => {
+const Task = (() => {
   var title = '';
   var description = '';
   var dueDate = '';
@@ -61,6 +61,6 @@ const Task = () => {
     getNotes,
     getPriorities,
   };
-};
+})();
 
 export { Task };

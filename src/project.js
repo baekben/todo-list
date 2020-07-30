@@ -1,6 +1,6 @@
 //for single project
 
-const Project = () => {
+const Project = (() => {
   var title = '';
   var description = '';
   var tasks = [];
@@ -39,6 +39,6 @@ const Project = () => {
     addTask,
     deleteTask,
   };
-};
+})();
 
 export { Project };
