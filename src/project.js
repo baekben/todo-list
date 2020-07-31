@@ -1,8 +1,8 @@
 //for single project
 
 const Project = () => {
-  var title = '';
-  var description = '';
+  var title = 'Default Title';
+  var description = 'Default Description';
   var tasks = [];
 
   const setTitle = (newTitle) => (title = newTitle);
