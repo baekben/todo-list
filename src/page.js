@@ -37,12 +37,12 @@ const Page = (() => {
     }
   };
 
-  const clearProjectsContent = () => {
-    projectsContent = '';
-  };
+  // const clearProjectsContent = () => {
+  //   projectsContent = '';
+  // };
 
   const projectRendering = (projectsArr) => {
-    clearProjectsContent();
+    // clearProjectsContent();
     for (let i = 0; i < projectsArr.length; i++) {
       let projectContainer = document.createElement('span');
       projectContainer.className = 'projectContainer';

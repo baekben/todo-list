@@ -5,7 +5,7 @@ const Index = (() => {
 
   const createNewProject = () => {
     let newProject = Project();
-    projects.push.apply(newProject);
+    projects.push(newProject);
     Page.projectRendering(projects);
   };
   const render = () => {
