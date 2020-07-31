@@ -37,12 +37,14 @@ const Page = (() => {
     }
   };
 
-  // const clearProjectsContent = () => {
-  //   projectsContent = '';
-  // };
+  const clearProjectsContent = () => {
+    while (projectsContent.firstChild) {
+      projectsContent.removeChild(projectsContent.firstChild);
+    }
+  };
 
   const projectRendering = (projectsArr) => {
-    // clearProjectsContent();
+    clearProjectsContent();
     for (let i = 0; i < projectsArr.length; i++) {
       let projectContainer = document.createElement('span');
       projectContainer.className = 'projectContainer';
