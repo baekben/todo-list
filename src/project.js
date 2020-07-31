@@ -1,25 +1,14 @@
 //for single project
 
-const Project = (() => {
+const Project = () => {
   var title = '';
   var description = '';
   var tasks = [];
 
-  const setTitle = (newTitle) => {
-    title = newTitle;
-  };
-  const setDescription = (newDescription) => {
-    description = newDescription;
-  };
-
-  const getTitle = () => {
-    title;
-  };
-
-  const getDescription = () => {
-    description;
-  };
-
+  const setTitle = (newTitle) => (title = newTitle);
+  const setDescription = (newDescription) => (description = newDescription);
+  const getTitle = () => title;
+  const getDescription = () => description;
   const getTasks = () => tasks;
 
   const addTask = (task) => {
@@ -39,6 +28,6 @@ const Project = (() => {
     addTask,
     deleteTask,
   };
-})();
+};
 
 export { Project };

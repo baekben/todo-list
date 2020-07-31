@@ -2,17 +2,22 @@
   "name": "todo-list",
   "version": "1.0.0",
   "description": "",
-  "private": true,
+  "private": "true",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "webpack"
   },
   "keywords": [],
-  "author": "",
+  "author": "Ben Baek",
   "license": "ISC",
   "devDependencies": {
+    "css-loader": "^4.1.1",
+    "style-loader": "^1.2.1",
     "webpack": "^4.44.1",
     "webpack-cli": "^3.3.12"
   },
-  "dependencies": {}
+  "dependencies": {
+    "lodash": "^4.17.19"
+  }
 }
