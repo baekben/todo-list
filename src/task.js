@@ -1,11 +1,11 @@
 //for single task
 
 const Task = () => {
-  var title = '';
-  var description = '';
-  var dueDate = '';
+  var title = 'Title';
+  var description = 'Description';
+  var dueDate = 'Due Date';
   var priority = '';
-  var notes = [];
+  var notes = [''];
   const priorities = ['!!!', '!!', '!'];
 
   const setTitle = (newTitle) => {
