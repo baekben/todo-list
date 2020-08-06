@@ -3,14 +3,13 @@ import { Project } from './project';
 import { Task } from './task';
 
 const Index = (() => {
-  let projects = [];
+  var projects = [];
 
   const addProject = (project) => {
     projects.push(project);
   };
-  const getProjects = () => {
-    projects;
-  };
+
+  const getProjects = () => projects;
 
   const createNewProject = () => {
     let newProject = Project();
@@ -19,23 +18,27 @@ const Index = (() => {
   };
 
   const createNewTask = (i) => {
+    console.log('project:' + project[0]);
+
     let task = Task();
     projects[i].addTask(task);
     Page.renderTasksinProject(i);
   };
 
-  const getProjectTasks = (projectClass) => {
+  const getTasksFromProjects = (projectClass) => {
     let id = '';
     for (let i = 0; i < projectClass.length; i++) {
-      if (projectClass[i] == '') {
+      if (projectClass[i] == '-') {
         for (let j = i; j < projectClass.length; j++) {
           id += projectClass[j];
+          console.log('id+ ' + id);
         }
         break;
       }
-      console.log(id);
-      Page.renderTasksinProject([id[id.length - 1]]);
     }
+    console.log('id:' + id);
+
+    Page.renderTasksinProject(id[id.length - 1]);
   };
   const render = () => {
     Page.start();
@@ -43,7 +46,7 @@ const Index = (() => {
   return {
     render,
     createNewProject,
-    getProjectTasks,
+    getTasksFromProjects,
     getProjects,
     createNewTask,
   };

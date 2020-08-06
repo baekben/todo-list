@@ -18,10 +18,10 @@ body {
 #site-main {
   flex-grow: 1;
   display: grid;
-  grid-template-areas: 'projects';
+  grid-template-areas: 'projects tasks';
   grid-template-columns: 1fr 2fr;
   grid-template-rows: 1fr;
-  background-color: orange;
+  height: 100%;
 }
 
 #site-main > div {
@@ -45,6 +45,11 @@ body {
   margin-top: 5px;
 }
 
+#projectsContent {
+  height: 860px;
+  overflow-y: auto;
+}
+
 #content {
   height: 800px;
   overflow-y: auto;
@@ -66,9 +71,15 @@ body {
   animation-name: projectContainerBackground;
   animation-duration: 1.5s;
   cursor: pointer;
-  background-color: gold;
+  background-color: brown;
 }
-.projectContainer > .projectTitle .projectContainer > hr {
+.projectContainer > .projectTitleContiner {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-content: center;
+}
+.projectContainer > hr {
   border: none;
   border-top: 1px solid #333;
   color: #333;
@@ -77,9 +88,20 @@ body {
   height: 5px;
 }
 
+#site-main > #tasks {
+  grid-area: tasks;
+  background-color: wheat;
+}
+
 #tasks > #tasksHeader {
   height: 50px;
-  background-color: palevioletred;
+  background-color: transparent;
+}
+
+#tasksHeader > .button {
+  display: block;
+  margin: auto;
+  margin-top: 5px;
 }
 
 #tasksHeader > #addTask {
@@ -88,14 +110,37 @@ body {
   margin-top: 5px;
 }
 
+#tasksContent {
+  height: 860px;
+  overflow-y: auto;
+}
+
 .taskContainer- {
   display: block;
-  width: 90%;
+  width: 70%;
   height: 100px;
   margin: auto;
   margin-top: 10px;
   margin-bottom: 10px;
   padding: 5px;
-  background-color: indianred;
+  background-color: green;
   border-radius: 5px;
+}
+
+.taskContainer-:hover {
+  animation: taskContinerbackground;
+  animation-duration: 1.5s;
+  background-color: palegreen;
+}
+
+/* .taskContainer- > .taskTitle {
+} */
+
+.taskContainer- > hr {
+  border: none;
+  border-top: 1px solid #333;
+  color: #333;
+  overflow: visible;
+  text-align: center;
+  height: 5px;
 }

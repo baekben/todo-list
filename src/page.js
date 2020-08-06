@@ -29,6 +29,7 @@ const Page = (() => {
   };
 
   const setNewTaskButton = (button, index) => {
+    console.log('Add new task button: ' + button + 'index: ' + index);
     button.addEventListener(
       'click',
       function () {
@@ -59,7 +60,7 @@ const Page = (() => {
     span.addEventListener(
       'click',
       function (e) {
-        Index.getProjectTasks(e.target.className);
+        Index.getTasksFromProjects(e.target.className);
       },
       false
     );
@@ -71,45 +72,52 @@ const Page = (() => {
       let projectContainer = document.createElement('span');
       projectContainer.className =
         'projectContainer-' + projectsArr[i].getTitle() + i;
+      let projectTitleContainer = document.createElement('span');
+      projectTitleContainer.className =
+        'projectTitleContainer-' + projectsArr[i].getTitle() + i;
       let title = document.createElement('h2');
       title.className = 'projectTitle-' + projectsArr[i].getTitle() + i;
+      let projectButtonsContainer = document.createElement('span');
+      projectButtonsContainer.className =
+        'projectButtonsContainer-' + projectsArr[i].getTitle() + i;
+      let editButton = document.createElement('button');
+      editButton.innerHTML = 'Edit';
+      let deleteButton = document.createElement('button');
+      deleteButton.innerHTML = 'Delete';
+      let space = document.createElement('hr');
       let description = document.createElement('h4');
       description.className =
         'projectDescription-' + projectsArr[i].getTitle() + i;
       title.innerHTML = projectsArr[i].getTitle();
       description.innerHTML = projectsArr[i].getDescription();
-      projectContainer.appendChild(title);
+      projectButtonsContainer.appendChild(editButton);
+      projectButtonsContainer.appendChild(deleteButton);
+      projectTitleContainer.appendChild(title);
+      projectTitleContainer.appendChild(projectButtonsContainer);
+      projectContainer.appendChild(projectButtonsContainer);
+      projectContainer.appendChild(projectTitleContainer);
+      projectContainer.appendChild(space);
       projectContainer.appendChild(description);
       setClickEvent(projectContainer);
       projectsContent.appendChild(projectContainer);
     }
   };
 
-  const setStyle = () => {
-    body.id = 'site-body';
-    content.id = 'content';
-    main.id = 'site-main';
-    projectsHeader.id = 'projectsHeader';
-    projectsContent.id = 'projectsContent';
-    projects.id = 'projects';
-    tasksHeader.id = 'tasksHeader';
-    tasksContent.id = 'tasksContent';
-    tasks.id = 'tasks';
-    footer.id = 'site-footer';
-  };
   const renderTasksHeader = (index) => {
     let addTask = document.createElement('button');
-    addTask.innerHTML('NEW TASK');
-    addTask.className('button');
-    addTask.id = 'newTask-' + Index.getProjectTasks()[index].getTitle();
+    addTask.innerHTML = 'NEW TASK';
+    addTask.className = 'button';
+    addTask.id = 'newTask-' + Index.getProjects()[index].getTitle();
     setNewTaskButton(addTask, index);
-    if (tasksContent.appendChild(addTask)) {
+    if (tasksHeader.appendChild(addTask)) {
       return true;
     }
   };
 
   const renderTasksinProject = (index) => {
-    let project = Index.getProject()[index];
+    console.log('index ' + index);
+    console.log('rendertasksinproject');
+    let project = Index.getProjects()[index];
     let tasksArr = project.getTasks();
     clearContent(tasks);
     clearContent(tasksHeader);
@@ -126,19 +134,20 @@ const Page = (() => {
       let space = document.createElement('hr');
       let taskDescription = document.createElement('h4');
       taskDescription.className = 'taskDescription-' + currentTitle + i;
-      let taskDueDate = docuement.createElement('h4');
+      let taskDueDate = document.createElement('h4');
       taskDueDate.className = 'taskDueDate-' + currentTitle + i;
 
       taskTitle.innerHTML = currentTitle;
       taskDescription.innerHTML = tasksArr[i].getDescription();
       taskDueDate.innerHTML = tasksArr[i].getDueDate();
       taskDiv.appendChild(taskTitle);
+      taskDiv.appendChild(space);
       taskDiv.appendChild(taskDescription);
       taskDiv.appendChild(taskDueDate);
       if (tasksArr[i].getNotes().length > 0) {
         let notes = document.createElement('span');
         notes.className = 'taskNotes-' + currentTitle + i;
-        for (let j = 0; i < tasksArr[i].getNotes().length; j++) {
+        for (let j = 0; j < tasksArr[i].getNotes().length; j++) {
           let note = document.createElement('p');
           note.className = 'taskNote-' + currentTitle + i;
           notes.appendChild(note);
@@ -147,6 +156,20 @@ const Page = (() => {
       }
       tasksContent.appendChild(taskDiv);
     }
+    console.log('rendered tasks');
+  };
+
+  const setStyle = () => {
+    body.id = 'site-body';
+    content.id = 'content';
+    main.id = 'site-main';
+    projectsHeader.id = 'projectsHeader';
+    projectsContent.id = 'projectsContent';
+    projects.id = 'projects';
+    tasksHeader.id = 'tasksHeader';
+    tasksContent.id = 'tasksContent';
+    tasks.id = 'tasks';
+    footer.id = 'site-footer';
   };
 
   const start = () => {
