@@ -56,7 +56,7 @@ const Page = (() => {
     }
   };
 
-  const setClickEvent = (span) => {
+  const setClickEvent = (span, edit, del) => {
     span.addEventListener(
       'click',
       function (e) {
@@ -64,6 +64,16 @@ const Page = (() => {
       },
       false
     );
+    edit.addEventListener(
+      'click',
+      function () {
+        console.log('project editing...');
+      },
+      false
+    );
+    del.addEventListener('click', function (e) {
+      Index.deleteProject(e.target.className);
+    });
   };
 
   const projectRendering = (projectsArr) => {
@@ -98,7 +108,7 @@ const Page = (() => {
       projectContainer.appendChild(projectTitleContainer);
       projectContainer.appendChild(space);
       projectContainer.appendChild(description);
-      setClickEvent(projectContainer);
+      setClickEvent(projectContainer, editButton, deleteButton);
       projectsContent.appendChild(projectContainer);
     }
   };
@@ -117,46 +127,48 @@ const Page = (() => {
   const renderTasksinProject = (index) => {
     console.log('index ' + index);
     console.log('rendertasksinproject');
-    let project = Index.getProjects()[index];
-    let tasksArr = project.getTasks();
     clearContent(tasks);
     clearContent(tasksHeader);
     tasks.appendChild(tasksHeader);
     tasks.appendChild(tasksContent);
     clearContent(tasksContent);
-    renderTasksHeader(index);
-    for (let i = 0; i < tasksArr.length; i++) {
-      let currentTitle = tasksArr[i].getTitle();
-      let taskDiv = document.createElement('div');
-      taskDiv.className = 'taskContainer-' + currentTitle + i;
-      let taskTitle = document.createElement('h2');
-      taskTitle.className = 'taskTitle-' + currentTitle + i;
-      let space = document.createElement('hr');
-      let taskDescription = document.createElement('h4');
-      taskDescription.className = 'taskDescription-' + currentTitle + i;
-      let taskDueDate = document.createElement('h4');
-      taskDueDate.className = 'taskDueDate-' + currentTitle + i;
+    if (index != null) {
+      let project = Index.getProjects()[index];
+      let tasksArr = project.getTasks();
+      renderTasksHeader(index);
+      for (let i = 0; i < tasksArr.length; i++) {
+        let currentTitle = tasksArr[i].getTitle();
+        let taskDiv = document.createElement('div');
+        taskDiv.className = 'taskContainer-' + currentTitle + i;
+        let taskTitle = document.createElement('h2');
+        taskTitle.className = 'taskTitle-' + currentTitle + i;
+        let space = document.createElement('hr');
+        let taskDescription = document.createElement('h4');
+        taskDescription.className = 'taskDescription-' + currentTitle + i;
+        let taskDueDate = document.createElement('h4');
+        taskDueDate.className = 'taskDueDate-' + currentTitle + i;
 
-      taskTitle.innerHTML = currentTitle;
-      taskDescription.innerHTML = tasksArr[i].getDescription();
-      taskDueDate.innerHTML = tasksArr[i].getDueDate();
-      taskDiv.appendChild(taskTitle);
-      taskDiv.appendChild(space);
-      taskDiv.appendChild(taskDescription);
-      taskDiv.appendChild(taskDueDate);
-      if (tasksArr[i].getNotes().length > 0) {
-        let notes = document.createElement('span');
-        notes.className = 'taskNotes-' + currentTitle + i;
-        for (let j = 0; j < tasksArr[i].getNotes().length; j++) {
-          let note = document.createElement('p');
-          note.className = 'taskNote-' + currentTitle + i;
-          notes.appendChild(note);
+        taskTitle.innerHTML = currentTitle;
+        taskDescription.innerHTML = tasksArr[i].getDescription();
+        taskDueDate.innerHTML = tasksArr[i].getDueDate();
+        taskDiv.appendChild(taskTitle);
+        taskDiv.appendChild(space);
+        taskDiv.appendChild(taskDescription);
+        taskDiv.appendChild(taskDueDate);
+        if (tasksArr[i].getNotes().length > 0) {
+          let notes = document.createElement('span');
+          notes.className = 'taskNotes-' + currentTitle + i;
+          for (let j = 0; j < tasksArr[i].getNotes().length; j++) {
+            let note = document.createElement('p');
+            note.className = 'taskNote-' + currentTitle + i;
+            notes.appendChild(note);
+          }
+          taskDiv.appendChild(notes);
         }
-        taskDiv.appendChild(notes);
+        tasksContent.appendChild(taskDiv);
       }
-      tasksContent.appendChild(taskDiv);
+      console.log('rendered tasks');
     }
-    console.log('rendered tasks');
   };
 
   const setStyle = () => {

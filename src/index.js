@@ -9,6 +9,10 @@ const Index = (() => {
     projects.push(project);
   };
 
+  const removeProject = (index) => {
+    projects.splice(index, 1);
+  };
+
   const getProjects = () => projects;
 
   const createNewProject = () => {
@@ -18,27 +22,38 @@ const Index = (() => {
   };
 
   const createNewTask = (i) => {
-    console.log('project:' + project[0]);
+    console.log('createNewTask i: ' + i);
 
     let task = Task();
     projects[i].addTask(task);
     Page.renderTasksinProject(i);
   };
 
-  const getTasksFromProjects = (projectClass) => {
+  const getProjectIndex = (projectClass) => {
     let id = '';
     for (let i = 0; i < projectClass.length; i++) {
       if (projectClass[i] == '-') {
         for (let j = i; j < projectClass.length; j++) {
           id += projectClass[j];
-          console.log('id+ ' + id);
         }
         break;
       }
     }
-    console.log('id:' + id);
 
-    Page.renderTasksinProject(id[id.length - 1]);
+    return id[id.length - 1];
+  };
+
+  const getTasksFromProjects = (projectClass) => {
+    let id = getProjectIndex(projectClass);
+    Page.renderTasksinProject(id);
+  };
+
+  const deleteProject = (project) => {
+    let id = getProjectIndex(project);
+    console.log(id);
+    removeProject(id);
+    Page.projectRendering(projects);
+    Page.renderTasksinProject(null);
   };
   const render = () => {
     Page.start();
@@ -49,6 +64,7 @@ const Index = (() => {
     getTasksFromProjects,
     getProjects,
     createNewTask,
+    deleteProject,
   };
 })();
 export { Index };
