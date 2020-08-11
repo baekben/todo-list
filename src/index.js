@@ -29,6 +29,17 @@ const Index = (() => {
     Page.renderTasksinProject(i);
   };
 
+  const editProject = (project) => {
+    Page.renderEdit(project);
+  };
+
+  const updateProject = (index, title, description) => {
+    let id = getProjectIndex(index);
+    projects[id].setTitle(title);
+    projects[id].setDescription(description);
+    Page.projectRendering(projects);
+  };
+
   const getProjectIndex = (projectClass) => {
     let id = '';
     for (let i = 0; i < projectClass.length; i++) {
@@ -65,6 +76,8 @@ const Index = (() => {
     getProjects,
     createNewTask,
     deleteProject,
+    editProject,
+    updateProject,
   };
 })();
 export { Index };

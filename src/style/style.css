@@ -67,18 +67,66 @@ body {
   border-radius: 5px;
 }
 
+.edit {
+  height: 200px;
+}
+
 .projectContainer:hover {
   animation-name: projectContainerBackground;
   animation-duration: 1.5s;
   cursor: pointer;
   background-color: brown;
 }
-.projectContainer > .projectTitleContiner {
+.projectContainer > .projectTitleContainer {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   align-content: center;
 }
+
+.projectTitleContainer > .projectTitle {
+  display: block;
+}
+
+.projectTitleContainer > .projectTitleInput {
+  display: none;
+}
+
+.edit > .projectTitleContainer > .projectTitleInput {
+  display: none;
+}
+
+.edit > .projectTitleContainer > .projectTitle {
+  display: block;
+}
+
+.projectTitleContainer > .projectButtonContainer > .projectEditButton {
+  display: inline-block;
+}
+
+.projectTitleContainer > .projectButtonContainer > .projectDeleteButton {
+  display: inline-block;
+}
+
+.projectTitleContainer > .projectButtonContainer > .projectOkButton {
+  display: none;
+}
+
+.edit > .projectTitleContainer > .projectButtonContainer > .projectEditButton {
+  display: none;
+}
+
+.edit
+  > .projectTitleContainer
+  > .projectButtonContainer
+  > .projectDeleteButton {
+  display: none;
+}
+
+.edit > .projectTitleContainer > .projectButtonContainer > .projectOkButton {
+  display: block;
+}
+
 .projectContainer > hr {
   border: none;
   border-top: 1px solid #333;
@@ -86,6 +134,25 @@ body {
   overflow: visible;
   text-align: center;
   height: 5px;
+}
+
+.projectContainer > .projectDescription {
+  display: block;
+}
+
+.edit > .projectDescription {
+  display: none;
+}
+
+.projectContainer > .projectDescriptionInput {
+  display: block;
+}
+
+.edit > .projectDescriptionInput {
+  display: block;
+  width: 100%;
+  height: 80%;
+  resize: none;
 }
 
 #site-main > #tasks {

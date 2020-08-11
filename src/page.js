@@ -29,7 +29,6 @@ const Page = (() => {
   };
 
   const setNewTaskButton = (button, index) => {
-    console.log('Add new task button: ' + button + 'index: ' + index);
     button.addEventListener(
       'click',
       function () {
@@ -56,7 +55,7 @@ const Page = (() => {
     }
   };
 
-  const setClickEvent = (span, edit, del) => {
+  const setClickEvent = (span, edit, del, ok) => {
     span.addEventListener(
       'click',
       function (e) {
@@ -66,50 +65,99 @@ const Page = (() => {
     );
     edit.addEventListener(
       'click',
-      function () {
-        console.log('project editing...');
+      function (e) {
+        Index.editProject(e.target.parentNode.parentNode.parentNode);
       },
       false
     );
-    del.addEventListener('click', function (e) {
-      Index.deleteProject(e.target.className);
-    });
+    del.addEventListener(
+      'click',
+      function (e) {
+        Index.deleteProject(e.target.className);
+      },
+      false
+    );
+    ok.addEventListener(
+      'click',
+      function (e) {
+        getInputValues(
+          e.target.className,
+          e.target.parentNode.parentNode.parentNode
+        );
+      },
+      false
+    );
   };
 
   const projectRendering = (projectsArr) => {
     clearContent(projectsContent);
     for (let i = 0; i < projectsArr.length; i++) {
+      let projectTitle = projectsArr[i].getTitle() + i;
+
+      let inputTitle = document.createElement('input');
+      let inputDescription = document.createElement('textarea');
+      let okButton = document.createElement('button');
+
       let projectContainer = document.createElement('span');
-      projectContainer.className =
-        'projectContainer-' + projectsArr[i].getTitle() + i;
+      projectContainer.className = 'projectContainer-' + projectTitle;
       let projectTitleContainer = document.createElement('span');
-      projectTitleContainer.className =
-        'projectTitleContainer-' + projectsArr[i].getTitle() + i;
+      projectTitleContainer.className = 'projectTitleContainer-' + projectTitle;
       let title = document.createElement('h2');
-      title.className = 'projectTitle-' + projectsArr[i].getTitle() + i;
+      title.className = 'projectTitle-' + projectTitle;
       let projectButtonsContainer = document.createElement('span');
       projectButtonsContainer.className =
-        'projectButtonsContainer-' + projectsArr[i].getTitle() + i;
+        'projectButtonsContainer-' + projectTitle;
+
       let editButton = document.createElement('button');
       editButton.innerHTML = 'Edit';
+
       let deleteButton = document.createElement('button');
       deleteButton.innerHTML = 'Delete';
+
       let space = document.createElement('hr');
       let description = document.createElement('h4');
-      description.className =
-        'projectDescription-' + projectsArr[i].getTitle() + i;
+      description.className = 'projectDescription-' + projectTitle;
+      okButton.className = 'projectOkButton-' + projectTitle;
+      editButton.className = 'projectEditButton-' + projectTitle;
+      deleteButton.className = 'projectDeleteButton-' + projectTitle;
+
+      inputTitle.placeholder = 'Title';
+      inputTitle.required = true;
+      inputDescription.placeholder = 'Description';
+      inputDescription.required = true;
+      okButton.innerHTML = 'OK';
+      inputTitle.className = 'projectTitleInput-' + projectTitle;
+      inputDescription.className = 'projectDescriptionInput-' + projectTitle;
+
       title.innerHTML = projectsArr[i].getTitle();
       description.innerHTML = projectsArr[i].getDescription();
       projectButtonsContainer.appendChild(editButton);
       projectButtonsContainer.appendChild(deleteButton);
+      projectButtonsContainer.appendChild(okButton);
       projectTitleContainer.appendChild(title);
+      projectTitleContainer.appendChild(inputTitle);
       projectTitleContainer.appendChild(projectButtonsContainer);
       projectContainer.appendChild(projectButtonsContainer);
       projectContainer.appendChild(projectTitleContainer);
       projectContainer.appendChild(space);
       projectContainer.appendChild(description);
-      setClickEvent(projectContainer, editButton, deleteButton);
+      projectContainer.appendChild(inputDescription);
+      setClickEvent(projectContainer, editButton, deleteButton, okButton);
       projectsContent.appendChild(projectContainer);
+    }
+  };
+
+  const renderEdit = (project) => {
+    console.log((project.className += ' edit'));
+  };
+
+  const getInputValues = (index, project) => {
+    let title = project.children[0].children[1].value;
+    let description = project.children[3].value;
+    if (title == '' && description == '') {
+      alert('Enter title and description');
+    } else {
+      Index.updateProject(index, title, description);
     }
   };
 
@@ -125,8 +173,6 @@ const Page = (() => {
   };
 
   const renderTasksinProject = (index) => {
-    console.log('index ' + index);
-    console.log('rendertasksinproject');
     clearContent(tasks);
     clearContent(tasksHeader);
     tasks.appendChild(tasksHeader);
@@ -189,7 +235,7 @@ const Page = (() => {
     setStyle();
   };
 
-  return { start, projectRendering, renderTasksinProject };
+  return { start, projectRendering, renderTasksinProject, renderEdit };
 })();
 
 export { Page };
