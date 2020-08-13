@@ -15,6 +15,14 @@ const Project = () => {
     tasks.push(task);
   };
 
+  const updateTask = (index, title, description, dueDate, priority, notes) => {
+    tasks[index].setTitle(title);
+    tasks[index].setDescription(description);
+    tasks[index].setDueDate(dueDate);
+    tasks[index].setPriority(priority);
+    tasks[index].setNotes(notes);
+  };
+
   const deleteTask = (index) => {
     tasks.splice(index, 1);
   };
@@ -27,6 +35,7 @@ const Project = () => {
     getTasks,
     addTask,
     deleteTask,
+    updateTask,
   };
 };
 

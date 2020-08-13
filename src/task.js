@@ -3,38 +3,38 @@
 const Task = () => {
   var title = 'Title';
   var description = 'Description';
-  var dueDate = 'Due Date';
+  var dueDate = 'Date';
   var priority = '';
-  var notes = [''];
-  const priorities = ['!!!', '!!', '!'];
+  var notes = '';
+  var projectId;
 
   const setTitle = (newTitle) => (title = newTitle);
   const setDescription = (newDescription) => (description = newDescription);
   const setDueDate = (newDueDate) => (dueDate = newDueDate);
   const setPriority = (newPriority) => (priority = newPriority);
-  const addNote = (newNote) => notes.push(newNote);
-  const deleteNote = (index) => notes.splice(index, 1);
+  const setNotes = (newNote) => (notes = newNote);
+  const setProjectId = (newProjectId) => (projectId = newProjectId);
 
   const getTitle = () => title;
   const getDescription = () => description;
   const getDueDate = () => dueDate;
   const getPriority = () => priority;
   const getNotes = () => notes;
-  const getPriorities = () => priorities;
+  const getProjectId = () => projectId;
 
   return {
     setTitle,
     setDescription,
     setDueDate,
     setPriority,
-    addNote,
-    deleteNote,
+    setNotes,
     getTitle,
     getDescription,
     getDueDate,
     getPriority,
     getNotes,
-    getPriorities,
+    setProjectId,
+    getProjectId,
   };
 };
 

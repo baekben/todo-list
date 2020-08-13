@@ -5,6 +5,13 @@ import { Task } from './task';
 const Index = (() => {
   var projects = [];
 
+  const defaultProject = () => {
+    let defaultProject = Project();
+    defaultProject.setTitle('Project 1');
+    defaultProject.setDescription('Project Description 1');
+    addProject(defaultProject);
+  };
+
   const addProject = (project) => {
     projects.push(project);
   };
@@ -22,9 +29,8 @@ const Index = (() => {
   };
 
   const createNewTask = (i) => {
-    console.log('createNewTask i: ' + i);
-
     let task = Task();
+    task.setProjectId(i);
     projects[i].addTask(task);
     Page.renderTasksinProject(i);
   };
@@ -61,13 +67,41 @@ const Index = (() => {
 
   const deleteProject = (project) => {
     let id = getProjectIndex(project);
-    console.log(id);
     removeProject(id);
     Page.projectRendering(projects);
     Page.renderTasksinProject(null);
   };
+
+  const editTask = (taskDiv) => {
+    Page.renderTaskEdit;
+  };
+
+  const updateTask = (
+    projectId,
+    button,
+    title,
+    description,
+    dueDate,
+    priority,
+    notes
+  ) => {
+    let taskId = getProjectIndex(button);
+    projects[projectId].updateTask(
+      taskId,
+      title,
+      description,
+      dueDate,
+      priority,
+      notes
+    );
+    Page.renderTasksinProject(projectId);
+  };
+
+  const deleteTask = (task) => {};
   const render = () => {
+    defaultProject();
     Page.start();
+    Page.projectRendering(projects);
   };
   return {
     render,
@@ -78,6 +112,9 @@ const Index = (() => {
     deleteProject,
     editProject,
     updateProject,
+    editTask,
+    updateTask,
+    deleteTask,
   };
 })();
 export { Index };
