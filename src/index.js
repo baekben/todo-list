@@ -1,3 +1,7 @@
+import '@fortawesome/fontawesome-free/js/fontawesome';
+import '@fortawesome/fontawesome-free/js/solid';
+import '@fortawesome/fontawesome-free/js/regular';
+import '@fortawesome/fontawesome-free/js/brands';
 import { Page } from './page';
 import { Project } from './project';
 import { Task } from './task';
@@ -7,8 +11,8 @@ const Index = (() => {
 
   const defaultProject = () => {
     let defaultProject = Project();
-    defaultProject.setTitle('Project 1');
-    defaultProject.setDescription('Project Description 1');
+    defaultProject.setTitle('Default');
+    defaultProject.setDescription('Project Description');
     addProject(defaultProject);
   };
 
@@ -73,7 +77,7 @@ const Index = (() => {
   };
 
   const editTask = (taskDiv) => {
-    Page.renderTaskEdit;
+    Page.renderTaskEdit(taskDiv);
   };
 
   const updateTask = (
@@ -97,12 +101,18 @@ const Index = (() => {
     Page.renderTasksinProject(projectId);
   };
 
-  const deleteTask = (task) => {};
+  const deleteTask = (projectId, buttonClass) => {
+    let taskId = getProjectIndex(buttonClass);
+    projects[projectId].removeTask(taskId);
+    Page.renderTasksinProject(projectId);
+  };
+
   const render = () => {
     defaultProject();
     Page.start();
     Page.projectRendering(projects);
   };
+
   return {
     render,
     createNewProject,

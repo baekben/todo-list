@@ -2,6 +2,11 @@
   margin: 0;
   padding: 0;
 }
+
+svg {
+  pointer-events: none;
+}
+
 html,
 body {
   width: 100%;
@@ -45,6 +50,32 @@ body {
   margin-top: 5px;
 }
 
+input[type='text'],
+textarea {
+  font-weight: bold;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+textarea {
+  border: 1px solid #333;
+  border-radius: 5px;
+}
+
+.button {
+  font-weight: bold;
+  background-color: gray;
+  border-color: gray;
+  border-radius: 5px;
+  padding: 10px;
+  color: black;
+}
+
+.button:hover {
+  cursor: pointer;
+  background-color: yellow;
+}
+
 #projectsContent {
   height: 860px;
   overflow-y: auto;
@@ -65,10 +96,20 @@ body {
   padding: 5px;
   background-color: aquamarine;
   border-radius: 5px;
+  border: 3px solic darkkhaki;
 }
 
 .edit {
   height: 200px;
+}
+
+@keyframes projectContainerBackground {
+  from {
+    background-color: cadetblue;
+  }
+  to {
+    background-color: navajowhite;
+  }
 }
 
 .projectContainer:hover {
@@ -94,6 +135,10 @@ body {
 
 .edit > .projectTitleContainer > .projectTitleInput {
   display: none;
+}
+
+.projectTitleContainer > .projectButtonContainer > span {
+  margin: 5px 5px 0 5px;
 }
 
 .edit > .projectTitleContainer > .projectTitle {
@@ -194,10 +239,27 @@ body {
   border-radius: 5px;
 }
 
-.taskContainer:hover {
-  animation: taskContinerbackground;
-  animation-duration: 1.5s;
-  background-color: palegreen;
+.taskContainer input[type='text'],
+.taskContainer textarea {
+  color: #f0ead6;
+  font-weight: bold;
+}
+
+.taskContainer textarea {
+  border: 1px solid #f0ead6;
+  border-radius: 5px;
+}
+
+.high {
+  border: 3px solid red;
+}
+
+.medium {
+  border: 3px solid yellow;
+}
+
+.low {
+  border: 3px solid green;
 }
 
 .editTask {
@@ -247,9 +309,9 @@ body {
   display: block;
 }
 
-.taskButtonsContainer > button {
+.taskButtonsContainer > span {
   cursor: pointer;
-  margin: 0 3px 5px 3px;
+  margin: 5px;
 }
 
 .taskContainer > hr {
@@ -309,7 +371,7 @@ body {
 }
 
 .taskOptionsContainer > .taskPriorityInput {
-  display: none;
+  height: 30px;
 }
 
 .taskContainer > .taskNotesInput {

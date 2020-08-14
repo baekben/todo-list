@@ -103,14 +103,17 @@ const Page = (() => {
       let projectTitleContainer = document.createElement('span');
       let title = document.createElement('h2');
       let projectButtonsContainer = document.createElement('span');
-      let taskEditButton = document.createElement('button');
-      let deleteButton = document.createElement('button');
+      let editButton = document.createElement('span');
+      let editIcon = document.createElement('span');
+      let deleteButton = document.createElement('span');
+      let deleteIcon = document.createElement('span');
       let space = document.createElement('hr');
       let description = document.createElement('h4');
 
       let inputTitle = document.createElement('input');
       let inputDescription = document.createElement('textarea');
-      let okButton = document.createElement('button');
+      let okButton = document.createElement('span');
+      let okIcon = document.createElement('span');
 
       projectContainer.className = 'projectContainer-' + projectTitle;
       projectTitleContainer.className = 'projectTitleContainer-' + projectTitle;
@@ -120,12 +123,16 @@ const Page = (() => {
 
       description.className = 'projectDescription-' + projectTitle;
       okButton.className = 'projectOkButton-' + projectTitle;
-      taskEditButton.className = 'projectEditButton-' + projectTitle;
+      okButton.title = 'DONE';
+      okIcon.className = 'fas fa-check-square';
+      editButton.className = 'projectEditButton-' + projectTitle;
+      editButton.title = 'EDIT';
+      editIcon.className = 'fas fa-edit';
       deleteButton.className = 'projectDeleteButton-' + projectTitle;
+      deleteButton.title = 'DELETE';
+      deleteIcon.className = 'fas fa-trash-alt';
       inputTitle.className = 'projectTitleInput-' + projectTitle;
       inputDescription.className = 'projectDescriptionInput-' + projectTitle;
-      taskEditButton.innerHTML = 'Edit';
-      deleteButton.innerHTML = 'Delete';
       inputTitle.type = 'text';
       inputTitle.placeholder = 'Title';
 
@@ -141,11 +148,14 @@ const Page = (() => {
       }
 
       inputDescription.required = true;
-      okButton.innerHTML = 'OK';
+      editButton.appendChild(editIcon);
+      deleteButton.appendChild(deleteIcon);
+      okButton.appendChild(okIcon);
+
       title.innerHTML = projectsArr[i].getTitle();
       description.innerHTML = projectsArr[i].getDescription();
       console.log(projectButtonsContainer);
-      projectButtonsContainer.appendChild(taskEditButton);
+      projectButtonsContainer.appendChild(editButton);
       projectButtonsContainer.appendChild(deleteButton);
       projectButtonsContainer.appendChild(okButton);
       projectTitleContainer.appendChild(title);
@@ -156,7 +166,7 @@ const Page = (() => {
       projectContainer.appendChild(description);
       projectContainer.appendChild(inputDescription);
 
-      setClickEvent(projectContainer, taskEditButton, deleteButton, okButton);
+      setClickEvent(projectContainer, editButton, deleteButton, okButton);
 
       projectsContent.appendChild(projectContainer);
 
@@ -164,7 +174,7 @@ const Page = (() => {
         projectsArr[i].getTitle() == 'Title' &&
         projectsArr[i].getDescription() == 'Description'
       ) {
-        taskEditButton.click();
+        editButton.click();
       }
     }
   };
@@ -196,7 +206,7 @@ const Page = (() => {
     del.addEventListener(
       'click',
       function (e) {
-        Index.deleteTask(e.target.className);
+        Index.deleteTask(projectId, e.target.className);
       },
       false
     );
@@ -244,8 +254,10 @@ const Page = (() => {
         let taskTitleContainer = document.createElement('span');
         let taskTitle = document.createElement('h2');
         let taskButtonsContainer = document.createElement('span');
-        let taskEditButton = document.createElement('button');
-        let deleteButton = document.createElement('button');
+        let taskEditButton = document.createElement('span');
+        let taskEditIcon = document.createElement('span');
+        let deleteButton = document.createElement('span');
+        let deleteIcon = document.createElement('span');
         let space = document.createElement('hr');
         let taskDescription = document.createElement('h4');
         let taskDueDate = document.createElement('h4');
@@ -258,16 +270,36 @@ const Page = (() => {
         let priorityLabel = document.createElement('label');
         let inputPriority = document.createElement('select');
         let inputNotes = document.createElement('textarea');
-        let okButton = document.createElement('button');
+        let okButton = document.createElement('span');
+        let okIcon = document.createElement('span');
 
         taskDiv.className =
           'taskContainer ' + currentTaskTitle + ' ' + tasksArr[i].getPriority();
+
+        let taskPriority = tasksArr[i].getPriority();
+        switch (taskPriority) {
+          case '!!!':
+            taskDiv.className += ' high';
+            break;
+          case '!!':
+            taskDiv.className += ' medium';
+            break;
+          case '!':
+            taskDiv.className += ' low';
+            break;
+        }
+
         taskTitleContainer.className = 'taskTitleContainer-' + currentTaskTitle;
         taskTitle.className = 'taskTitle-' + currentTaskTitle;
         taskButtonsContainer.className =
           'taskButtonsContainer-' + currentTaskTitle;
         taskEditButton.className = 'taskEditButton-' + currentTaskTitle;
+        taskEditButton.title = 'Edit';
+        taskEditIcon.className = 'fas fa-edit';
         deleteButton.className = 'taskDeleteButton-' + currentTaskTitle;
+        deleteButton.title = 'Delete';
+        deleteIcon.className = 'fas fa-trash-alt';
+
         taskDescription.className = 'taskDescription-' + currentTaskTitle;
         taskDueDate.className = 'taskDueDate-' + currentTaskTitle;
 
@@ -275,7 +307,7 @@ const Page = (() => {
         inputTitle.type = 'text';
         inputTitle.placeholder = 'Title';
         inputTitle.required = true;
-        inputDescription.className = 'taskDescriptionInput ' + currentTaskTitle;
+        inputDescription.className = 'taskDescriptionInput-' + currentTaskTitle;
         inputDescription.placeholder = 'Description';
         inputDescription.required = true;
         taskOptionsContainer.className =
@@ -294,15 +326,15 @@ const Page = (() => {
         inputNotes.className = 'taskNotesInput-' + currentTaskTitle;
         inputNotes.placeholder = 'Notes';
         okButton.className = 'taskOkButton-' + currentTaskTitle;
+        okButton.title = 'Done';
+        okIcon.className = 'fas fa-check-square';
 
         taskTitle.innerHTML = tasksArr[i].getTitle();
         taskDescription.innerHTML = tasksArr[i].getDescription();
         taskDueDate.innerHTML = tasksArr[i].getDueDate();
-        deleteButton.innerHTML = 'Delete';
-        taskEditButton.innerHTML = 'Edit';
-        okButton.innerHTML = 'OK';
-        dueDateLabel.innerHTML = 'Due Date: ';
-        priorityLabel.innerHTML = 'Priority: ';
+
+        dueDateLabel.innerHTML = 'Due Date : ';
+        priorityLabel.innerHTML = 'Priority : ';
 
         if (tasksArr[i].getTitle() != 'Title') {
           inputTitle.value = tasksArr[i].getTitle();
@@ -316,9 +348,11 @@ const Page = (() => {
         if (tasksArr[i].getNotes().length > 0) {
           inputNotes.value = tasksArr[i].getNotes();
         }
-        //appending not wworking whyyyyy
-        console.log(taskButtonsContainer);
-        console.log(taskEditButton);
+
+        taskEditButton.appendChild(taskEditIcon);
+        deleteButton.appendChild(delteIcon);
+        okButton.appendChild(okIcon);
+
         taskButtonsContainer.appendChild(taskEditButton);
         taskButtonsContainer.appendChild(deleteButton);
         taskButtonsContainer.appendChild(okButton);
@@ -328,10 +362,23 @@ const Page = (() => {
         taskDiv.appendChild(taskTitleContainer);
         taskDiv.appendChild(space);
         taskDiv.appendChild(taskDescription);
+        taskDiv.appendChild(inputDescription);
         taskDiv.appendChild(taskDueDate);
         taskOptionsContainer.appendChild(dueDateLabel);
-        taskOptionsContainer.appendChild(priorityLabel);
         taskOptionsContainer.appendChild(inputDueDate);
+        taskOptionsContainer.appendChild(priorityLabel);
+
+        for (let j = 0; j < taskPriorities.length; j++) {
+          let taskPriorityOption = document.createElement('option');
+          taskPriorityOption.className =
+            'taskPriorityOption-' + currentTaskTitle;
+          taskPriorityOption.value = taskPriorities[j];
+          taskPriorityOption.innerHTML = taskPriorities[j];
+          if (taskPriorities[j] == tasksArr[i].getPriority()) {
+            priorityItem.selected = 'selected';
+          }
+          inputPriority.appendChild(taskPriorityOption);
+        }
         taskOptionsContainer.appendChild(inputPriority);
         taskDiv.appendChild(taskOptionsContainer);
 
