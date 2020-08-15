@@ -1,42 +1,39 @@
 //for single project
 
-const Project = () => {
-  var title = 'Title';
-  var description = 'Description';
-  var tasks = [];
+class Project {
+  constructor(title, description, tasks) {
+    this.title = title ? title : 'Title';
+    this.description = description ? description : 'Description';
+    this.tasks = tasks ? tasks : [];
+  }
 
-  const setTitle = (newTitle) => (title = newTitle);
-  const setDescription = (newDescription) => (description = newDescription);
-  const getTitle = () => title;
-  const getDescription = () => description;
-  const getTasks = () => tasks;
+  setTitle = (newTitle) => (this.title = newTitle);
+  setDescription = (newDescription) => (this.description = newDescription);
+  getTitle() {
+    return this.title;
+  }
+  getDescription() {
+    return this.description;
+  }
+  getTasks() {
+    return this.tasks;
+  }
 
-  const addTask = (task) => {
-    tasks.push(task);
+  addTask = (task) => {
+    this.tasks.push(task);
   };
 
-  const updateTask = (index, title, description, dueDate, priority, notes) => {
-    tasks[index].setTitle(title);
-    tasks[index].setDescription(description);
-    tasks[index].setDueDate(dueDate);
-    tasks[index].setPriority(priority);
-    tasks[index].setNotes(notes);
+  updateTask = (index, title, description, dueDate, priority, notes) => {
+    this.tasks[index].setTitle(title);
+    this.tasks[index].setDescription(description);
+    this.tasks[index].setDueDate(dueDate);
+    this.tasks[index].setPriority(priority);
+    this.tasks[index].setNotes(notes);
   };
 
-  const deleteTask = (index) => {
-    tasks.splice(index, 1);
+  deleteTask = (index) => {
+    this.tasks.splice(index, 1);
   };
-
-  return {
-    setTitle,
-    setDescription,
-    getTitle,
-    getDescription,
-    getTasks,
-    addTask,
-    deleteTask,
-    updateTask,
-  };
-};
+}
 
 export { Project };
