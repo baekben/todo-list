@@ -248,7 +248,7 @@ const Page = (() => {
       let tasksArr = project.getTasks();
       renderTasksHeader(index);
       for (let i = 0; i < tasksArr.length; i++) {
-        let currentTaskTitle = tasksArr[i].getTitle() + i;
+        let currentTaskTitle = tasksArr[i].title + i;
 
         let taskDiv = document.createElement('div');
         let taskTitleContainer = document.createElement('span');
@@ -274,9 +274,9 @@ const Page = (() => {
         let okIcon = document.createElement('span');
 
         taskDiv.className =
-          'taskContainer ' + currentTaskTitle + ' ' + tasksArr[i].getPriority();
+          'taskContainer ' + currentTaskTitle + ' ' + tasksArr[i].priority;
 
-        let taskPriority = tasksArr[i].getPriority();
+        let taskPriority = tasksArr[i].priority;
         switch (taskPriority) {
           case '!!!':
             taskDiv.className += ' high';
@@ -336,17 +336,17 @@ const Page = (() => {
         dueDateLabel.innerHTML = 'Due Date : ';
         priorityLabel.innerHTML = 'Priority : ';
 
-        if (tasksArr[i].getTitle() != 'Title') {
-          inputTitle.value = tasksArr[i].getTitle();
+        if (tasksArr[i].title != 'Title') {
+          inputTitle.value = tasksArr[i].title;
         }
-        if (tasksArr[i].getDescription() != 'Description') {
-          inputDescription.value = tasksArr[i].getDescription();
+        if (tasksArr[i].description != 'Description') {
+          inputDescription.value = tasksArr[i].description;
         }
-        if (tasksArr[i].getDueDate() != 'Date') {
-          inputDueDate.value = tasksArr[i].getDueDate();
+        if (tasksArr[i].dueDate != 'Date') {
+          inputDueDate.value = tasksArr[i].dueDate;
         }
-        if (tasksArr[i].getNotes() != 'No Notes') {
-          inputNotes.value = tasksArr[i].getNotes();
+        if (tasksArr[i].notes != 'No Notes') {
+          inputNotes.value = tasksArr[i].notes;
         }
 
         taskEditButton.appendChild(taskEditIcon);
@@ -374,7 +374,7 @@ const Page = (() => {
             'taskPriorityOption-' + currentTaskTitle;
           taskPriorityOption.value = taskPriorities[j];
           taskPriorityOption.innerHTML = taskPriorities[j];
-          if (taskPriorities[j] == tasksArr[i].getPriority()) {
+          if (taskPriorities[j] == tasksArr[i].priority) {
             taskPriorityOption.selected = 'selected';
           }
           inputPriority.appendChild(taskPriorityOption);
@@ -382,7 +382,7 @@ const Page = (() => {
         taskOptionsContainer.appendChild(inputPriority);
         taskDiv.appendChild(taskOptionsContainer);
 
-        if (tasksArr[i].getNotes() != 'No Notes') {
+        if (tasksArr[i].notes != 'No Notes') {
           let notes = document.createElement('span');
           notes.className = 'taskNotes-' + currentTaskTitle;
           taskDiv.appendChild(notes);
@@ -393,9 +393,9 @@ const Page = (() => {
         tasksContent.appendChild(taskDiv);
 
         if (
-          tasksArr[i].getTitle() == 'Title' &&
-          tasksArr[i].getDescription() == 'Description' &&
-          tasksArr[i].getDueDate() == 'Date'
+          tasksArr[i].title == 'Title' &&
+          tasksArr[i].description == 'Description' &&
+          tasksArr[i].dueDate == 'Date'
         ) {
           taskEditButton.click();
         }

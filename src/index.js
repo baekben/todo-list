@@ -47,9 +47,7 @@ const Index = (() => {
 
   const clearProjects = () => {
     for (let i = Index.projects.length; i > 0; i--) {
-      console.log(Index.projects.length);
       Index.projects.pop();
-      console.log(Index.projects.length);
     }
   };
 
@@ -135,12 +133,14 @@ const Index = (() => {
       priority,
       notes
     );
+    saveToStorage;
     Page.renderTasksinProject(projectId);
   };
 
   const deleteTask = (projectId, buttonClass) => {
     let taskId = getProjectIndex(buttonClass);
     projects[projectId].removeTask(taskId);
+    saveToStorage;
     Page.renderTasksinProject(projectId);
   };
 

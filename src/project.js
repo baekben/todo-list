@@ -32,11 +32,11 @@ class Project {
   }
 
   updateTask(index, title, description, dueDate, priority, notes) {
-    this.tasks[index].setTitle(title);
-    this.tasks[index].setDescription(description);
-    this.tasks[index].setDueDate(dueDate);
-    this.tasks[index].setPriority(priority);
-    this.tasks[index].setNotes(notes);
+    this.tasks[index].title = title;
+    this.tasks[index].description = description;
+    this.tasks[index].dueDate = dueDate;
+    this.tasks[index].priority = priority;
+    this.tasks[index].notes = notes;
   }
 
   removeTask(index) {

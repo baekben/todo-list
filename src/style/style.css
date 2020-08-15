@@ -9,6 +9,7 @@ svg {
 
 html,
 body {
+  font-family: Arial, Helvetica, sans-serif;
   width: 100%;
   height: 100%;
   overflow-y: hidden;
@@ -39,10 +40,11 @@ body {
   background-color: bisque;
   align-content: flex-start;
   justify-content: flex-start;
+  border-right: 3px solid black;
 }
 #projects > #projectsHeader {
   height: 50px;
-  background-color: blueviolet;
+  background-color: transparent;
 }
 #projectHeader > #addProject {
   display: block;
@@ -81,13 +83,8 @@ textarea {
   overflow-y: auto;
 }
 
-#content {
-  height: 800px;
-  overflow-y: auto;
-}
-
 .projectContainer {
-  width: 80%;
+  width: 90%;
   display: block;
   height: 100px;
   margin: auto;
@@ -96,7 +93,7 @@ textarea {
   padding: 5px;
   background-color: aquamarine;
   border-radius: 5px;
-  border: 3px solic darkkhaki;
+  border: 3px solid darkkhaki;
 }
 
 .edit {
@@ -137,12 +134,15 @@ textarea {
   display: none;
 }
 
+.edit > .projectTitleContainer > .projectTitle {
+  display: block;
+}
+
 .projectTitleContainer > .projectButtonContainer > span {
   margin: 5px 5px 0 5px;
 }
 
-.edit > .projectTitleContainer > .projectTitle {
-  display: block;
+.edit > .projectTitleContainer > .projectButtonContainer {
 }
 
 .projectTitleContainer > .projectButtonContainer > .projectEditButton {
@@ -172,6 +172,11 @@ textarea {
   display: block;
 }
 
+.projectButtonContainer > button {
+  cursor: pointer;
+  margin: 0 3px 5px 3px;
+}
+
 .projectContainer > hr {
   border: none;
   border-top: 1px solid #333;
@@ -190,7 +195,7 @@ textarea {
 }
 
 .projectContainer > .projectDescriptionInput {
-  display: block;
+  display: none;
 }
 
 .edit > .projectDescriptionInput {
@@ -211,12 +216,6 @@ textarea {
 }
 
 #tasksHeader > .button {
-  display: block;
-  margin: auto;
-  margin-top: 5px;
-}
-
-#tasksHeader > #addTask {
   display: block;
   margin: auto;
   margin-top: 5px;
@@ -287,6 +286,9 @@ textarea {
 
 .editTask > .taskTitleContainer > .taskTitleInput {
   display: block;
+}
+
+.taskTitleContainer > .taskButtonsContainer {
 }
 
 .taskTitleContainer > .taskButtonsContainer > .taskEditButton {
@@ -383,4 +385,29 @@ textarea {
   width: 100%;
   height: 22%;
   resize: none;
+}
+
+@media all and (max-width: 1000px) {
+  #site-main {
+    grid-template-areas:
+      'projects'
+      'items';
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 2fr;
+  }
+
+  #site-main > #projects {
+    border-right: 0;
+    border-bottom: 3px solid #f0ead6;
+  }
+
+  #tasksContent {
+    height: 550px;
+    overflow-y: auto;
+  }
+
+  #projectsContent {
+    height: 250px;
+    overflow-y: auto;
+  }
 }
