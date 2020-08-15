@@ -9,44 +9,81 @@ import { Task } from './task';
 const Index = (() => {
   var projects = [];
 
+  const saveToStorage = () => {
+    localStorage.setItem(
+      'projectsArr',
+      JSON.stringify(Index.projects, null, 4)
+    );
+    getFromStorage();
+  };
+
+  const getFromStorage = () => {
+    let storage = false;
+    clearProjects();
+
+    let projectsLocalStorage = localStorage.getItem('projectsArr');
+    let projectsFromLocalStorage = JSON.parse(projectsLocalStorage);
+
+    if (projectsFromLocalStorage != null) {
+      for (let i = 0; i < projectsFromLocalStorage.length; i++) {
+        storage = true;
+
+        let project = new Project();
+        project.setTitle(projectsFromLocalStorage[i].title);
+        project.setDescription(projectsFromLocalStorage[i].description);
+        project.setTasks(projectsFromLocalStorage[i].tasks);
+        addProject(project);
+      }
+    }
+
+    return storage;
+  };
+
   const defaultProject = () => {
-    let defaultProject = Project();
-    defaultProject.setTitle('Default');
-    defaultProject.setDescription('Project Description');
+    let defaultProject = new Project('Default', 'Project Description');
     addProject(defaultProject);
+    saveToStorage();
+  };
+
+  const clearProjects = () => {
+    for (let i = Index.projects.length; i > 0; i--) {
+      console.log(Index.projects.length);
+      Index.projects.pop();
+      console.log(Index.projects.length);
+    }
   };
 
   const addProject = (project) => {
-    projects.push(project);
+    Index.projects.push(project);
   };
 
   const removeProject = (index) => {
-    projects.splice(index, 1);
+    Index.projects.splice(index, 1);
+    saveToStorage();
   };
 
-  const getProjects = () => projects;
-
   const createNewProject = () => {
-    let newProject = Project();
+    let newProject = new Project();
     addProject(newProject);
     Page.projectRendering(projects);
   };
 
   const createNewTask = (i) => {
-    let task = Task();
+    let task = new Task();
     task.setProjectId(i);
     projects[i].addTask(task);
     Page.renderTasksinProject(i);
   };
 
   const editProject = (project) => {
-    Page.renderEdit(project);
+    Page.renderEditProject(project);
   };
 
   const updateProject = (index, title, description) => {
     let id = getProjectIndex(index);
     projects[id].setTitle(title);
     projects[id].setDescription(description);
+    saveToStorage();
     Page.projectRendering(projects);
   };
 
@@ -77,7 +114,7 @@ const Index = (() => {
   };
 
   const editTask = (taskDiv) => {
-    Page.renderTaskEdit(taskDiv);
+    Page.renderEditTask(taskDiv);
   };
 
   const updateTask = (
@@ -108,7 +145,9 @@ const Index = (() => {
   };
 
   const render = () => {
-    defaultProject();
+    if (!getFromStorage() && Index.projects.length == 0) {
+      defaultProject();
+    }
     Page.start();
     Page.projectRendering(projects);
   };
@@ -117,7 +156,7 @@ const Index = (() => {
     render,
     createNewProject,
     getTasksFromProjects,
-    getProjects,
+    projects,
     createNewTask,
     deleteProject,
     editProject,

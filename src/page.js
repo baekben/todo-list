@@ -136,14 +136,14 @@ const Page = (() => {
       inputTitle.type = 'text';
       inputTitle.placeholder = 'Title';
 
-      if (projectsArr[i].getTitle() != 'Title') {
+      if (projectsArr[i].title != 'Title') {
         inputTitle.value = projectsArr[i].getTitle();
       }
 
       inputTitle.required = true;
       inputDescription.placeholder = 'Description';
 
-      if (projectsArr[i].getDescription() != 'Description') {
+      if (projectsArr[i].description != 'Description') {
         inputDescription.value = projectsArr[i].getDescription();
       }
 
@@ -179,8 +179,8 @@ const Page = (() => {
     }
   };
 
-  const renderEdit = (project) => {
-    project.className += ' editTask';
+  const renderEditProject = (project) => {
+    project.className += ' edit';
   };
 
   const getInputValues = (index, project) => {
@@ -244,7 +244,7 @@ const Page = (() => {
     clearContent(tasksContent);
 
     if (index != null) {
-      let project = Index.getProjects()[index];
+      let project = Index.projects[index];
       let tasksArr = project.getTasks();
       renderTasksHeader(index);
       for (let i = 0; i < tasksArr.length; i++) {
@@ -329,9 +329,9 @@ const Page = (() => {
         okButton.title = 'Done';
         okIcon.className = 'fas fa-check-square';
 
-        taskTitle.innerHTML = tasksArr[i].getTitle();
-        taskDescription.innerHTML = tasksArr[i].getDescription();
-        taskDueDate.innerHTML = tasksArr[i].getDueDate();
+        taskTitle.innerHTML = tasksArr[i].title;
+        taskDescription.innerHTML = tasksArr[i].description;
+        taskDueDate.innerHTML = tasksArr[i].dueDate;
 
         dueDateLabel.innerHTML = 'Due Date : ';
         priorityLabel.innerHTML = 'Priority : ';
@@ -345,12 +345,12 @@ const Page = (() => {
         if (tasksArr[i].getDueDate() != 'Date') {
           inputDueDate.value = tasksArr[i].getDueDate();
         }
-        if (tasksArr[i].getNotes().length > 0) {
+        if (tasksArr[i].getNotes() != 'No Notes') {
           inputNotes.value = tasksArr[i].getNotes();
         }
 
         taskEditButton.appendChild(taskEditIcon);
-        deleteButton.appendChild(delteIcon);
+        deleteButton.appendChild(deleteIcon);
         okButton.appendChild(okIcon);
 
         taskButtonsContainer.appendChild(taskEditButton);
@@ -375,23 +375,19 @@ const Page = (() => {
           taskPriorityOption.value = taskPriorities[j];
           taskPriorityOption.innerHTML = taskPriorities[j];
           if (taskPriorities[j] == tasksArr[i].getPriority()) {
-            priorityItem.selected = 'selected';
+            taskPriorityOption.selected = 'selected';
           }
           inputPriority.appendChild(taskPriorityOption);
         }
         taskOptionsContainer.appendChild(inputPriority);
         taskDiv.appendChild(taskOptionsContainer);
 
-        if (tasksArr[i].getNotes().length > 0) {
+        if (tasksArr[i].getNotes() != 'No Notes') {
           let notes = document.createElement('span');
           notes.className = 'taskNotes-' + currentTaskTitle;
-          for (let j = 0; j < tasksArr[i].getNotes().length; j++) {
-            let note = document.createElement('p');
-            note.className = 'taskNote-' + currentTaskTitle;
-            notes.appendChild(note);
-          }
           taskDiv.appendChild(notes);
         }
+        taskDiv.appendChild(inputNotes);
 
         setTaskClickEvents(taskEditButton, deleteButton, okButton, index);
         tasksContent.appendChild(taskDiv);
@@ -454,7 +450,7 @@ const Page = (() => {
     start,
     projectRendering,
     renderTasksinProject,
-    renderEdit,
+    renderEditProject,
     renderEditTask,
   };
 })();
