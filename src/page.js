@@ -115,24 +115,24 @@ const Page = (() => {
       let okButton = document.createElement('span');
       let okIcon = document.createElement('span');
 
-      projectContainer.className = 'projectContainer-' + projectTitle;
-      projectTitleContainer.className = 'projectTitleContainer-' + projectTitle;
-      title.className = 'projectTitle-' + projectTitle;
+      projectContainer.className = 'projectContainer ' + projectTitle;
+      projectTitleContainer.className = 'projectTitleContainer ' + projectTitle;
+      title.className = 'projectTitle ' + projectTitle;
       projectButtonsContainer.className =
-        'projectButtonsContainer-' + projectTitle;
+        'projectButtonsContainer ' + projectTitle;
 
-      description.className = 'projectDescription-' + projectTitle;
-      okButton.className = 'projectOkButton-' + projectTitle;
+      description.className = 'projectDescription ' + projectTitle;
+      okButton.className = 'projectOkButton ' + projectTitle;
       okButton.title = 'DONE';
       okIcon.className = 'fas fa-check-square';
-      editButton.className = 'projectEditButton-' + projectTitle;
+      editButton.className = 'projectEditButton ' + projectTitle;
       editButton.title = 'EDIT';
       editIcon.className = 'fas fa-edit';
-      deleteButton.className = 'projectDeleteButton-' + projectTitle;
+      deleteButton.className = 'projectDeleteButton ' + projectTitle;
       deleteButton.title = 'DELETE';
       deleteIcon.className = 'fas fa-trash-alt';
-      inputTitle.className = 'projectTitleInput-' + projectTitle;
-      inputDescription.className = 'projectDescriptionInput-' + projectTitle;
+      inputTitle.className = 'projectTitleInput ' + projectTitle;
+      inputDescription.className = 'projectDescriptionInput ' + projectTitle;
       inputTitle.type = 'text';
       inputTitle.placeholder = 'Title';
 
@@ -289,43 +289,43 @@ const Page = (() => {
             break;
         }
 
-        taskTitleContainer.className = 'taskTitleContainer-' + currentTaskTitle;
-        taskTitle.className = 'taskTitle-' + currentTaskTitle;
+        taskTitleContainer.className = 'taskTitleContainer ' + currentTaskTitle;
+        taskTitle.className = 'taskTitle ' + currentTaskTitle;
         taskButtonsContainer.className =
-          'taskButtonsContainer-' + currentTaskTitle;
-        taskEditButton.className = 'taskEditButton-' + currentTaskTitle;
+          'taskButtonsContainer ' + currentTaskTitle;
+        taskEditButton.className = 'taskEditButton ' + currentTaskTitle;
         taskEditButton.title = 'Edit';
         taskEditIcon.className = 'fas fa-edit';
-        deleteButton.className = 'taskDeleteButton-' + currentTaskTitle;
+        deleteButton.className = 'taskDeleteButton ' + currentTaskTitle;
         deleteButton.title = 'Delete';
         deleteIcon.className = 'fas fa-trash-alt';
 
-        taskDescription.className = 'taskDescription-' + currentTaskTitle;
-        taskDueDate.className = 'taskDueDate-' + currentTaskTitle;
+        taskDescription.className = 'taskDescription ' + currentTaskTitle;
+        taskDueDate.className = 'taskDueDate ' + currentTaskTitle;
 
-        inputTitle.className = 'taskTitleInput-' + currentTaskTitle;
+        inputTitle.className = 'taskTitleInput ' + currentTaskTitle;
         inputTitle.type = 'text';
         inputTitle.placeholder = 'Title';
         inputTitle.required = true;
-        inputDescription.className = 'taskDescriptionInput-' + currentTaskTitle;
+        inputDescription.className = 'taskDescriptionInput ' + currentTaskTitle;
         inputDescription.placeholder = 'Description';
         inputDescription.required = true;
         taskOptionsContainer.className =
           'taskOptionContainer ' + currentTaskTitle;
-        dueDateLabel.className = 'taskDueDateLabel-' + currentTaskTitle;
+        dueDateLabel.className = 'taskDueDateLabel ' + currentTaskTitle;
         dueDateLabel.for = 'dueDate';
-        inputDueDate.className = 'taskDueDateInput-' + currentTaskTitle;
+        inputDueDate.className = 'taskDueDateInput ' + currentTaskTitle;
         inputDueDate.name = 'dueDate';
         inputDueDate.type = 'date';
         inputDueDate.required = true;
-        priorityLabel.className = 'taskPriorityLabel-' + currentTaskTitle;
+        priorityLabel.className = 'taskPriorityLabel ' + currentTaskTitle;
         priorityLabel.for = 'priority';
-        inputPriority.className = 'taskPriorityInput-' + currentTaskTitle;
+        inputPriority.className = 'taskPriorityInput ' + currentTaskTitle;
         inputPriority.name = 'priority';
         inputPriority.required = true;
-        inputNotes.className = 'taskNotesInput-' + currentTaskTitle;
+        inputNotes.className = 'taskNotesInput ' + currentTaskTitle;
         inputNotes.placeholder = 'Notes';
-        okButton.className = 'taskOkButton-' + currentTaskTitle;
+        okButton.className = 'taskOkButton ' + currentTaskTitle;
         okButton.title = 'Done';
         okIcon.className = 'fas fa-check-square';
 
@@ -371,7 +371,7 @@ const Page = (() => {
         for (let j = 0; j < taskPriorities.length; j++) {
           let taskPriorityOption = document.createElement('option');
           taskPriorityOption.className =
-            'taskPriorityOption-' + currentTaskTitle;
+            'taskPriorityOption ' + currentTaskTitle;
           taskPriorityOption.value = taskPriorities[j];
           taskPriorityOption.innerHTML = taskPriorities[j];
           if (taskPriorities[j] == tasksArr[i].priority) {
@@ -384,7 +384,7 @@ const Page = (() => {
 
         if (tasksArr[i].notes != 'No Notes') {
           let notes = document.createElement('span');
-          notes.className = 'taskNotes-' + currentTaskTitle;
+          notes.className = 'taskNotes ' + currentTaskTitle;
           taskDiv.appendChild(notes);
         }
         taskDiv.appendChild(inputNotes);

@@ -16,7 +16,7 @@ body {
   overflow-x: hidden;
 }
 
-#site-body {
+#content {
   display: flex;
   flex-direction: column;
 }
@@ -42,6 +42,7 @@ body {
   justify-content: flex-start;
   border-right: 3px solid black;
 }
+
 #projects > #projectsHeader {
   height: 50px;
   background-color: transparent;
@@ -113,7 +114,7 @@ textarea {
   animation-name: projectContainerBackground;
   animation-duration: 1.5s;
   cursor: pointer;
-  background-color: brown;
+  background-color: navajowhite;
 }
 .projectContainer > .projectTitleContainer {
   display: flex;
@@ -130,19 +131,16 @@ textarea {
   display: none;
 }
 
-.edit > .projectTitleContainer > .projectTitleInput {
+.edit > .projectTitleContainer > .projectTitle {
   display: none;
 }
 
-.edit > .projectTitleContainer > .projectTitle {
+.edit > .projectTitleContainer > .projectTitleInput {
   display: block;
 }
 
 .projectTitleContainer > .projectButtonContainer > span {
   margin: 5px 5px 0 5px;
-}
-
-.edit > .projectTitleContainer > .projectButtonContainer {
 }
 
 .projectTitleContainer > .projectButtonContainer > .projectEditButton {
@@ -288,9 +286,6 @@ textarea {
   display: block;
 }
 
-.taskTitleContainer > .taskButtonsContainer {
-}
-
 .taskTitleContainer > .taskButtonsContainer > .taskEditButton {
   display: inline-block;
 }
@@ -303,7 +298,7 @@ textarea {
   display: none;
 }
 
-.editTask > .taskTitleContainer > .taskDeleteButton {
+.editTask > .taskTitleContainer > .taskButtonsContainer > .taskDeleteButton {
   display: none;
 }
 

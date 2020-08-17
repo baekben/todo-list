@@ -27,7 +27,6 @@ const Index = (() => {
     if (projectsFromLocalStorage != null) {
       for (let i = 0; i < projectsFromLocalStorage.length; i++) {
         storage = true;
-
         let project = new Project();
         project.setTitle(projectsFromLocalStorage[i].title);
         project.setDescription(projectsFromLocalStorage[i].description);
@@ -35,7 +34,6 @@ const Index = (() => {
         addProject(project);
       }
     }
-
     return storage;
   };
 
@@ -88,7 +86,7 @@ const Index = (() => {
   const getProjectIndex = (projectClass) => {
     let id = '';
     for (let i = 0; i < projectClass.length; i++) {
-      if (projectClass[i] == '-') {
+      if (projectClass[i] == ' ') {
         for (let j = i; j < projectClass.length; j++) {
           id += projectClass[j];
         }
@@ -133,14 +131,14 @@ const Index = (() => {
       priority,
       notes
     );
-    saveToStorage;
+    saveToStorage();
     Page.renderTasksinProject(projectId);
   };
 
   const deleteTask = (projectId, buttonClass) => {
     let taskId = getProjectIndex(buttonClass);
     projects[projectId].removeTask(taskId);
-    saveToStorage;
+    saveToStorage();
     Page.renderTasksinProject(projectId);
   };
 
