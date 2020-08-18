@@ -123,13 +123,13 @@ const Page = (() => {
 
       description.className = 'projectDescription ' + projectTitle;
       okButton.className = 'projectOkButton ' + projectTitle;
-      okButton.title = 'DONE';
+      okButton.title = 'Done';
       okIcon.className = 'fas fa-check-square';
       editButton.className = 'projectEditButton ' + projectTitle;
-      editButton.title = 'EDIT';
+      editButton.title = 'Edit';
       editIcon.className = 'fas fa-edit';
       deleteButton.className = 'projectDeleteButton ' + projectTitle;
-      deleteButton.title = 'DELETE';
+      deleteButton.title = 'Delete';
       deleteIcon.className = 'fas fa-trash-alt';
       inputTitle.className = 'projectTitleInput ' + projectTitle;
       inputDescription.className = 'projectDescriptionInput ' + projectTitle;
@@ -154,7 +154,6 @@ const Page = (() => {
 
       title.innerHTML = projectsArr[i].getTitle();
       description.innerHTML = projectsArr[i].getDescription();
-      console.log(projectButtonsContainer);
       projectButtonsContainer.appendChild(editButton);
       projectButtonsContainer.appendChild(deleteButton);
       projectButtonsContainer.appendChild(okButton);
